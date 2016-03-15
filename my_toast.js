@@ -1,0 +1,130 @@
+function Toast(options) {
+    //default settings
+    this._settings = {root:"my_toast",autoHide:true,delay:2000,content:"这里是toast内容",callback:function(){}};
+    //custom settings
+    this._customSettings = {};
+    
+    this.getSetting = function (settingName){
+        return this._settings[settingName];
+    }
+    
+    this.setSetting = function (settingName,settingValue){
+        this._settings[settingName] = settingValue;
+    }
+    
+    this.initToast = function (options){
+        this._customSettings = options;        
+        for (var settingName in this._customSettings) {
+            this._settings[settingName] = (this._customSettings[settingName] == undefined) ?  this._settings[settingName] : this._customSettings[settingName];
+        }               
+        //console.log('toast inited');
+    };
+    
+    this.hide = function (){   
+        //console.log("hide begin");
+        var ele = document.getElementById(this.getSetting('root'));  
+        if (ele.style.display == 'none') {
+            //console.warn('already hide');
+            return;
+        }
+        ele.style.display = 'none';
+        if(typeof arguments[0] == 'function'){
+            arguments[0]();
+        }
+        //console.log("hide end");
+    }; 
+    
+    /*
+    *show()
+    *show(content)
+    *show(delay)
+    *show(content,delay)
+    *show(content,callback)
+    *show(content,autoHide) 
+    *show(content,delay,callback)
+    *show(content,autoHide,delay,callback) //autoHide为false时设置delay是没有什么意义的
+    */
+    this.show = function () {
+        var content = this.getSetting('content');
+        var delay = this.getSetting('delay');
+        var autoHide = this.getSetting('autoHide');
+        var callback = this.getSetting('callback');
+        // console.log("show toast begin");
+        if (arguments.length==1) {
+            if(typeof arguments[0]=='string'){
+                content = arguments[0];    
+            }else if(typeof arguments[0]=='number'){
+                delay = arguments[0];
+            }else if(typeof arguments[0] == 'function'){
+                callback = arguments[0];
+            }else if(typeof arguments[0] == 'boolean'){
+                autoHide = arguments[0];
+            }           
+        }else if(arguments.length==2){
+            //第一个参数
+            if(typeof arguments[0] == 'string'){
+                content = arguments[0];    
+            }else if(typeof arguments[0] == 'number'){
+                delay = arguments[0];
+            }else if(typeof arguments[0] == 'boolean'){
+                autoHide = arguments[0];
+            }
+            //第二个参数
+            if(typeof arguments[1] == 'number'){
+                delay = arguments[1];
+            }else if(typeof arguments[1] == 'function'){
+                callback = arguments[1];
+            }
+        }else if(arguments.length==3){
+            content = arguments[0];
+            delay = arguments[1];
+            callback = arguments[2];
+        }
+        
+        var body = document.getElementsByTagName("body")[0];
+        var ele = document.getElementById(this.getSetting('root'));
+        if(typeof ele == 'undefined'||ele == null){
+            ele = document.createElement("div");
+            ele.innerHTML = '<div class="my_mask_transparent"></div><div class="my_toast"><p class="my_toast_content">'+content+'</p></div>';
+            ele.style.display = 'none';
+            ele.id = this.getSetting('root');
+            body.appendChild(ele);    
+        }else{
+            ele.innerHTML = '<div class="my_mask_transparent"></div><div class="my_toast"><p class="my_toast_content">'+content+'</p></div>';
+        }
+        //注册隐藏事件
+        var mask = document.getElementsByClassName("my_mask_transparent")[0];
+        mask.onclick = function(){ ele.style.display = 'none'; callback(); };
+                        
+        if (ele.style.display!='none') {
+            //console.warn('already shown');
+            return;
+        }
+        ele.style.display = 'block';
+        if (autoHide) {
+            setTimeout(function () {
+                ele.style.display = 'none';
+                callback();
+            },delay);
+        }
+        // console.log("show toast end");
+    };
+    
+    this.toogle = function(){
+        var ele = document.getElementById(this.getSetting('root'));
+        if(typeof ele == 'undefined' || ele == null || ele.style.display=='none'){
+            this.show(arguments);
+        }else{
+            this.hide();
+        }
+    };
+    
+    constructor = this.initToast(options);
+    
+    if (Toast._initialized == "undefined") {
+        Toast.prototype.constructor = this.initToast(options);           
+        
+        Toast._initialized = true;
+    }
+}    
+window.toast = new Toast();
