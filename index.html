@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyToast</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <link rel="stylesheet" href="./lib/my_toast.css"/>
+<style>
+        .my_btn{
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        div{
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>    
+    <div>
+        <div>
+            <button type="button" class="my_btn" onclick="toast.show()">点击弹出Toast</button>
+            <span>show()</span>
+        </div>
+        <div>
+            <button type="button" class="my_btn" onclick="toast.show(false)">点击弹出Toast</button>
+            <span>show(autoHide)</span>
+        </div>
+        <div>
+            <button type="button" class="my_btn" onclick="toast.show('Iam Kangkang')">点击弹出Toast</button>
+            <span>show(content)</span>
+        </div>
+        <div>
+            <button type="button" class="my_btn" onclick="toast.show(3000)">点击弹出Toast</button>
+            <span>show(delay)</span>
+        </div>
+        
+        <div>
+            <button type="button" class="my_btn" onclick="toast.show(function(){alert('xixixi')})">点击弹出Toast</button>
+            <span>show(callback)</span>
+        </div>
+        
+        <div>
+            <button type="button" class="my_btn" id="sayHiButton">点击弹出Toast</button>
+            <span>show(content,callback)</span>
+        </div>
+        <div>
+            <button type="button" class="my_btn" onclick="toast.show('delay test',4000)">点击弹出Toast</button>
+            <span>show(content,delay)</span>
+        </div>
+        <div>
+            <button type="button" class="my_btn" onclick="toast.show('delay test',3000,function(){alert('hahaha');})">点击弹出Toast</button>
+            <span>show(content,delay,callback)</span>
+        </div>
+    </div>
+    <script type="text/javascript" src="./lib/my_toast.js"></script>
+    <script>
+        toast.show();
+        document.getElementById("sayHiButton").onclick = function(){ toast.show('hahaha  xixixi',function(){alert('Hi,Kangkang,Iam Michael');}); };
+    </script>
+</body>
+</html>
