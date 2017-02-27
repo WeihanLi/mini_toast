@@ -1,4 +1,4 @@
-.my_toast {
+.mini_toast {
     position: fixed;
     z-index: 3;
     width: 8em;
@@ -11,10 +11,10 @@
     border-radius: 5px;
     color: #FFFFFF;
 }
-.my_toast_content {
+.mini_toast_content {
     margin:15px;
 }
-.my_mask {
+.custom_mask {
     position: fixed;
     z-index: 1;
     width: 100%;
@@ -23,7 +23,7 @@
     left: 0;
     background: rgba(0, 0, 0, 0.6);
 }
-.my_mask_transparent {
+.custom_mask_transparent {
     position: fixed;
     z-index: 1;
     width: 100%;
@@ -31,7 +31,7 @@
     top: 0;
     left: 0;
 }
-.my_mask_transition {
+.custom_mask_transition {
     display: none;
     position: fixed;
     z-index: 1;

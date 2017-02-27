@@ -1,6 +1,6 @@
 function Toast(options) {
     //default settings
-    this._settings = {root:"my_toast",logger:false,autoHide:true,delay:2000,content:"这里是toast内容",callback:function(){}};
+    this._settings = {root:"mini_toast",logger:false,autoHide:true,delay:2000,content:"这里是toast内容",callback:function(){}};
     //custom settings
     this._customSettings = {};
     //define the function getSetting
@@ -97,15 +97,15 @@ function Toast(options) {
         var ele = document.getElementById(this.getSetting('root'));
         if(typeof ele === 'undefined'||ele === null){
             ele = document.createElement("div");
-            ele.innerHTML = '<div class="my_mask_transparent"></div><div class="my_toast"><p class="my_toast_content">'+content+'</p></div>';
+            ele.innerHTML = '<div class="custom_mask_transparent"></div><div class="mini_toast"><p class="mini_toast_content">'+content+'</p></div>';
             ele.style.display = 'none';
             ele.id = this.getSetting('root');
             body.appendChild(ele);
         }else{
-            ele.innerHTML = '<div class="my_mask_transparent"></div><div class="my_toast"><p class="my_toast_content">'+content+'</p></div>';
+            ele.innerHTML = '<div class="custom_mask_transparent"></div><div class="mini_toast"><p class="mini_toast_content">'+content+'</p></div>';
         }
         //register hide event
-        var mask = document.getElementsByClassName("my_mask_transparent")[0];
+        var mask = document.getElementsByClassName("custom_mask_transparent")[0];
         mask.onclick = function(){
             ele.style.display = 'none';
             callback();
