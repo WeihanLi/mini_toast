@@ -8,8 +8,8 @@ mini_toast 是用 js 实现的一个仿微信通知消息的一个 toast通知�
 
 *** 
 	
-		<link rel="stylesheet" type="text/css" href="../my_toast.css"/>
-		<script type="text/javascript" src="../my_toast.js"></script>   
+		<link rel="stylesheet" type="text/css" href="../mini_toast.css"/>
+		<script type="text/javascript" src="../mini_toast.js"></script>   
 
  ***
 
