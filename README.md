@@ -6,22 +6,22 @@ mini_toast 是用 js 实现的一个仿微信通知消息的一个 toast通知�
 
 ### import js and css file in the page 在页面中导入js和css文件
 
-*** 
+``` html
 	
-		<link rel="stylesheet" type="text/css" href="../mini_toast.css"/>
-		<script type="text/javascript" src="../mini_toast.js"></script>   
+<link rel="stylesheet" type="text/css" href="../mini_toast.css"/>
+<script type="text/javascript" src="../mini_toast.js"></script>   
 
- ***
+```
 
 ### use in the page  在页面中使用
-***
+``` javascript
 
-		toast.show('Hello toast!');
+toast.show('Hello toast!');
+
+toast.show('delay test',4000)
+
+toast.show('delay test',3000,function(){alert('hahaha');});
+
+toast.show('hahaha  xixixi',function(){alert('Hi,Kangkang,Iam Michael');});
 		
-		toast.show('delay test',4000)
-		
-		toast.show('delay test',3000,function(){alert('hahaha');});
-		
-		toast.show('hahaha  xixixi',function(){alert('Hi,Kangkang,Iam Michael');});
-		
-***
+```
